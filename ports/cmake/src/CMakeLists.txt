@@ -74,9 +74,12 @@ check_function_exists(execvp HAVE_EXECVP)
 check_function_exists(ctermid HAVE_CTERMID)
 check_function_exists(clock_gettime HAVE_CLOCK_GETTIME)
 
-check_type_size(off_t SIZEOF_OFF_T)
+# MPG123_SIZEOF_OFF_T is name of the cache variable,
+# SIZEOF_OFF_T will be used in configure_file("config.cmake.h.in" "config.h")
+check_type_size(off_t MPG123_SIZEOF_OFF_T)
+set(SIZEOF_OFF_T "${MPG123_SIZEOF_OFF_T}")
 
-if(SIZEOF_OFF_T LESS 8)
+if(MPG123_SIZEOF_OFF_T LESS 8)
 check_function_exists(lseek64 LFS_LARGEFILE_64)
 
 if(LFS_LARGEFILE_64)
